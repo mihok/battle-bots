@@ -1,15 +1,34 @@
 import { IAction } from '../action';
 import Arm from './arm';
 
-export interface IEnergyWeaponState {
+export interface IWeaponState {
+  isFiring: boolean;
+  fireDelay: number;
+}
+
+export interface IEnergyWeaponState extends IWeaponState {
+  isCool: boolean;
   coolDownTime?: number;
-  cool: boolean;
+}
+
+const initialState: IEnergyWeaponState = {
+  isFiring: false,
+  isCool: true,
+  coolDownTime: 250,
+  fireDelay: 10,
 }
 
 // Actions
 export const SHOOT = 'SHOOT';
-export class BlasterShootAction implements IAction {
-  readonly type: string = SHOOT;
+export const START_SHOOTING = 'START_SHOOTING';
+export const STOP_SHOOTING = 'STOP_SHOOTING';
+export class BlasterShootBeginAction implements IAction {
+  readonly type: string = START_SHOOTING;
+  constructor(public payload: any = {}) {}
+}
+
+export class BlasterShootEndAction implements IAction {
+  readonly type: string = STOP_SHOOTING;
   constructor(public payload: any = {}) {}
 }
 
@@ -21,15 +40,7 @@ export class BlasterCoolDownAction implements IAction {
 
 
 export default class BlasterArm extends Arm {
-  // actions = {
-  //   shoot: SHOOT,
-  //   coolDown: COOL_DOWN
-  // }
-
-  state: IEnergyWeaponState = {
-    coolDownTime: 250,
-    cool: true
-  }
+  state: IEnergyWeaponState = initialState
 
   constructor () {
     super();
@@ -37,30 +48,38 @@ export default class BlasterArm extends Arm {
 
   reducer (state, action) {
     switch (action.type) {
-      case SHOOT:
-        return this.state = {
+      case START_SHOOTING:
+        // TODO: Not sure how to do side effects
+        if (!this.state.isCool || this.state.isFiring) {
+          return this.state;
+        }
+
+        // TODO: Should we be doing this in the reducers?
+        setTimeout(() => {
+          this.dispatch(new BlasterShootEndAction({}));
+        }, this.state.fireDelay);
+
+        setTimeout(() => {
+          this.dispatch(new BlasterCoolDownAction({}));
+        }, this.state.coolDownTime);
+
+        return {
           ...this.state,
-          cool: false,
+          isFiring: true,
+          isCool: false,
+        }
+      case STOP_SHOOTING:
+        return {
+          ...this.state,
+          isFiring: false,
         }
       case COOL_DOWN:
-        return this.state = {
+        return {
           ...this.state,
-          cool: true,
+          isCool: true,
         }
-    }
+   }
 
     return this.state;
-  }
-
-  shoot () {
-    console.log('PEW PEW PEW'); 
-
-    if (this.state.cool) {
-      this.dispatch(new BlasterShootAction({}));
-
-      setTimeout(() => {
-        this.dispatch(new BlasterCoolDownAction({}));
-      }, this.state.coolDownTime);
-    }
   }
 }

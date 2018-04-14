@@ -1,19 +1,20 @@
 import { IComponent } from '../component';
+import { IAction } from '../action';
 
 export default class Arm implements IComponent {
 
-  actions = [];
+  actions: IAction[] = [];
   state = {};
 
   constructor () { }
 
-  subscribers = [];
-  subscribeToState(subscribe) {
+  private subscribers: Function[] = [];
+  public subscribeToState(subscribe) {
     this.subscribers.push(subscribe);
     subscribe(this.state);
   }
 
-  getActions () {
+  public getActions (): IAction[] {
     return this.actions;
   }
 
@@ -22,12 +23,12 @@ export default class Arm implements IComponent {
     return this.state;
   }
 
-  dispatch (action) {
+  public dispatch (action) {
     this.state = this.reducer(this.state, action);
     this.emitChange();
   }
 
-  emitChange() {
+  private emitChange() {
     for (let i = 0; i < this.subscribers.length; i++) {
       this.subscribers[i](this.state);
     }
