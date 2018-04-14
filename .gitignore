@@ -4,6 +4,7 @@ build-tsc/
 dist/
 package-lock.json
 
+*.orig
 
 # Created by https://www.gitignore.io/api/node,macos,linux,visualstudio,visualstudiocode
 
