@@ -43,7 +43,6 @@ class ComponentManager {
             // Get actions
             let actions = this.components[key].getActions();
             if (actions.actions) {
-                console.log("Actions", actions);
                 let actionKeys = Object.keys(actions.actions);
                 actionKeys.map(actionKey => {
                     // Create the action
@@ -53,8 +52,6 @@ class ComponentManager {
                         command: actions.actions[actionKey],
                         payload: null
                     };
-
-                    console.log("Creating component action", action);
 
                     this.actions.push(action);
 
