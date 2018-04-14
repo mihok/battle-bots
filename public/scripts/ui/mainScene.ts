@@ -24,6 +24,7 @@ export class MainScene {
         let geomTerrain = new THREE.BoxGeometry(200, 1, 200);
         let matTerrain = new THREE.MeshBasicMaterial({ color: 0x30A860 });
         let terrain = new THREE.Mesh(geomTerrain, matTerrain);
+        terrainObj.receiveShadow = true;
         terrainObj.add(terrain);
         terrainObj.position.set(0, -4, 0);
 

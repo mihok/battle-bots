@@ -18,13 +18,13 @@ function onload() {
     const engine = new Engine();
 
     // Load the core
-    core.registerComponent(HeadComponent, 'head');
-    core.registerComponent(BlasterArmComponent, 'leftArm');
+    // core.registerComponent(HeadComponent, 'head');
+    // core.registerComponent(BlasterArmComponent, 'leftArm');
     core.registerComponent(BipedComponent, 'legs');
 
     componentManager.init();
     queueManager.init();
-    
+
     engine.init();
     engine.loadScene(MainScene);
 }
