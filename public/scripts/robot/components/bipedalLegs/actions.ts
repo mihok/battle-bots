@@ -31,13 +31,23 @@ export class SideStepRightAction implements IAction {
 }
 
 
-export const TURN = '[Biped] Turn';
-export interface ITurnPayload {
+export const TURN_RIGHT = '[Biped] Turn Right';
+export interface ITurnRightPayload {
   degrees: number;
 }
-export class TurnAction implements IAction {
-  readonly type: string = TURN;
-  constructor(public payload: ITurnPayload = { degrees: 0 }) {}
+export class TurnRightAction implements IAction {
+  readonly type: string = TURN_RIGHT;
+  constructor(public payload: ITurnRightPayload = { degrees: 90 }) {}
+}
+
+
+export const TURN_LEFT = '[Biped] Turn Left';
+export interface ITurnLeftPayload {
+  degrees: number;
+}
+export class TurnLeftAction implements IAction {
+  readonly type: string = TURN_LEFT;
+  constructor(public payload: ITurnLeftPayload = { degrees: -90 }) {}
 }
 
 export const STANDBY = '[Biped] Standby';
@@ -53,6 +63,7 @@ export const actions = {
   [WALK_BACKWARDS]: WalkBackwardsAction,
   [SIDESTEP_LEFT]: SideStepLeftAction,
   [SIDESTEP_RIGHT]: SideStepRightAction,
-  [TURN]: TurnAction,
+  [TURN_RIGHT]: TurnRightAction,
+  [TURN_LEFT]: TurnLeftAction,
   [STANDBY]: StandbyAction
 };

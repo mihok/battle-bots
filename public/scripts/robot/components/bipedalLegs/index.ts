@@ -18,7 +18,7 @@ const initialState: ILegsState = {
 }
 
 export class BipedComponent extends LegsComponent {
-  
+
   actions = BipedActions
   state: ILegsState = initialState;
 
@@ -34,7 +34,7 @@ export class BipedComponent extends LegsComponent {
     if (action.type !== BipedActions.STANDBY) {
       setTimeout(() => {
         this.dispatch(new BipedActions.StandbyAction())
-      }, this.state.standByDelay)    
+      }, this.state.standByDelay)
     }
 
     switch (action.type) {
@@ -62,7 +62,7 @@ export class BipedComponent extends LegsComponent {
             perpendicular: -1 * this.state.speed,
           }
         }
-    
+
       case BipedActions.SIDESTEP_RIGHT:
         return {
           ...this.state,
@@ -71,20 +71,27 @@ export class BipedComponent extends LegsComponent {
             perpendicular: 1 * this.state.speed,
           }
         }
-      case BipedActions.TURN:
-        let newDirection = this.state.direction + action.payload.degrees;
-
-        if (newDirection > 360) {
-          newDirection -= 360;
-        }
+      case BipedActions.TURN_RIGHT: {
+        if (!action.payload.degrees) action.payload.degrees = -1;
 
         return {
           ...this.state,
-          direction: newDirection
+          direction: action.payload.degrees
         }
+      }
+
+      case BipedActions.TURN_LEFT: {
+        if (!action.payload.degrees) action.payload.degrees = 1;
+
+        return {
+          ...this.state,
+          direction: action.payload.degrees
+        }
+      }
       case BipedActions.STANDBY:
         return {
           ...this.state,
+          direction: 0,
           delta: {
             parallel: 0,
             perpendicular: 0

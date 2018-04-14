@@ -114,7 +114,7 @@ class QueueManager {
 
             if (action) {
                 console.log("Triggering action", action);
-                core.command(action.service, new action.command(action.payload));
+                core.command(action.service, new action.command({}));
                 this.actionIndex = index;
             } else {
                 this.restartActions();

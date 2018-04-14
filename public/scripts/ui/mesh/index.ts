@@ -20,7 +20,7 @@ export class RobotMesh {
   private subMeshes = {}
 
 
-  constructor (scene) { 
+  constructor (scene) {
     // Load the core
 
     core.subscribeToState((state) => {
@@ -55,8 +55,8 @@ export class RobotMesh {
     core.command('legs', new bipedActions.WalkForwardAction());
     */
     // core.command('head', new headActions.SeekAction());
-    
-    
+
+
     // Main mesh
     let mesh = new THREE.Object3D();
 
@@ -70,7 +70,7 @@ export class RobotMesh {
     let head = new HeadMesh();
     // let head = this.createHead();
     mesh.add(head.getTHREEMesh());
-    
+
     // core.registerComponent(HeadComponent, 'head');
     // core.subscribeToComponentState('head', this.handleHeadStateChange);
 
@@ -78,7 +78,7 @@ export class RobotMesh {
     // Create arms
     let leftArm = new LeftArmMesh();
     mesh.add(leftArm.getTHREEMesh());
-    
+
     // core.registerComponent(BlasterArmComponent, 'leftArm');
     // core.subscribeToComponentState('leftArm', this.handleLeftArmStateChange);
 
@@ -121,7 +121,7 @@ export class RobotMesh {
 
     let leftLeg = new THREE.Mesh(geomLeg, matLeg);
     leftLeg.position.set(0.55, -2.5, 1);
-    leftLeg.castShadow = true;    
+    leftLeg.castShadow = true;
     leftLeg.receiveShadow = true;
 
     let rightLeg = new THREE.Mesh(geomLeg, matLeg);
@@ -154,12 +154,17 @@ export class RobotMesh {
   }
 
   public update (dt) {
-    console.log("[RobotMesh] UPDATE", dt);
-    // if (state.delta.parallel) {
-    this.mesh.position.add(new THREE.Vector3(
-      dt*this.state.delta.perpendicular, 
-      0,
-      dt*this.state.delta.parallel));
-    // }
+
+    // var matrix = new THREE.Matrix4();
+    // matrix.extractRotation( this.mesh.matrix );
+
+    // var direction = new THREE.Vector3( 1, 0, 1 );
+    // direction = matrix.multiplyVector3( direction );
+
+    this.mesh.translateX(dt * this.state.delta.perpendicular);
+    this.mesh.translateZ(dt * this.state.delta.parallel);
+
+    // Update rotation
+    this.mesh.rotateY(this.state.direction * dt);
   }
 }
