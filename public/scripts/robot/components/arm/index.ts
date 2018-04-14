@@ -1,9 +1,10 @@
 import { IComponent } from '../../component';
 import { IAction } from '../../action';
 
-export default class Arm implements IComponent {
+export class ArmComponent implements IComponent {
+  public readonly type ='leftArm';
 
-  actions: IAction[] = [];
+  actions = {};
   state = {};
 
   constructor () { }
@@ -14,12 +15,14 @@ export default class Arm implements IComponent {
     subscribe(this.state);
   }
 
-  public getActions (): IAction[] {
+  public getActions () {
     return this.actions;
   }
 
   // Override this
   reducer (state, action) {
+    console.log('[Arm]', action);
+   
     return this.state;
   }
 
