@@ -45,33 +45,30 @@ class Core {
     }
 
 
-    getActions(): IAction[] {
+    public getActions(): IAction[] {
         return this.actions;
     }
 
 
-    getComponents() {
+    public getComponents() {
         return this.components;
     }
 
 
-    getComponentMethods(component: string) {
+    public getComponentMethods(component: string) {
         return this.components[component].getMethods();
     }
 
 
-    command(componentName: string, methodName: string) {
+    public command(componentName: string, action: any) {
         if (this.components[componentName])
-            if (this.components[componentName][methodName])
-                this.components[componentName][methodName](); // Invoke component command.
-            else
-                throw new Error(`Component method ${methodName} not register on ${componentName}.`);
+            this.components[componentName].dispatch(action); // Invoke component command.
         else
             throw new Error(`Component ${componentName} does not exist.`);
     }
 
 
-    reducer(state: ICoreState, action: IAction) {
+    private reducer(state: ICoreState, action: IAction) {
         switch(action.type) {
             case TAKE_DAMAGE:
                 return {
@@ -90,13 +87,13 @@ class Core {
     }
 
 
-    dispatch(action: CoreAction) {
+    public dispatch(action: CoreAction) {
         this.state = this.reducer(this.state, action);
         this.emitChange();
     }
 
 
-    emitChange() {
+    private emitChange() {
         for (let i = 0; i < this.subscribers.length; i++) {
             this.subscribers[i](this.state);
         }
@@ -126,5 +123,3 @@ export type CoreAction =
 
 
 export const core = new Core();
-
-core.dispatch(new TakeDamageAction());
