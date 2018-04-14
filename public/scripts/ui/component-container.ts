@@ -27,9 +27,9 @@ export class ComponentContainer {
 
             // Get actions
             let actions = this.components[key].getActions();
-            if (actions) {
+            if (actions.actions) {
                 console.log("Actions", actions);
-                let actionKeys = Object.keys(actions);
+                let actionKeys = Object.keys(actions.actions);
                 actionKeys.map(actionKey => {
                     let div = document.createElement('div');
                     let template = `

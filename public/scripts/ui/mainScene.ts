@@ -16,6 +16,17 @@ export class MainScene {
         light.position.set( 0, 10, 3 );
         scene.add( light );
 
+
+        // Terrain mesh
+        let terrainObj = new THREE.Object3D();
+        let geomTerrain = new THREE.BoxGeometry(200, 1, 200);
+        let matTerrain = new THREE.MeshBasicMaterial({ color: 0x8c8c8c });
+        let terrain = new THREE.Mesh(geomTerrain, matTerrain);
+        terrainObj.add(terrain);
+        terrainObj.position.set(0, -4, 0);
+
+        scene.add(terrainObj);
+
         // Main mesh
         let mesh = new THREE.Object3D();
 
@@ -23,6 +34,7 @@ export class MainScene {
         let geomTorso = new THREE.BoxGeometry( 2, 2, 2 );
         let matTorso = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
         let torso = new THREE.Mesh( geomTorso, matTorso );
+        torso.position.set(0, 0, 1);
         torso.castShadow = true;
         torso.receiveShadow = true;
         mesh.add(torso);
@@ -66,7 +78,11 @@ export class MainScene {
 
         scene.add(mesh);
 
-        engine.camera.position.z = 10;
+        engine.camera.position.z = 5;
+        engine.camera.position.x = 5;
+        engine.camera.position.y = 5;
+
+        engine.camera.lookAt(mesh.position);
 
         // scene.gameObjects = [];
         // scene.fog = new THREE.Fog(0xf7d9aa, 1000, 8000);

@@ -1,4 +1,4 @@
-import { actions } from './actions';
+import * as HeadActions from './actions';
 
 export class HeadComponent {
     public readonly type = 'head';
@@ -18,7 +18,7 @@ export class HeadComponent {
 
 
     getActions() {
-        return actions;
+        return HeadActions;
     }
 
 

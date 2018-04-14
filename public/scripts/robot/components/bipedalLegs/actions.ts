@@ -45,3 +45,14 @@ export class StandbyAction implements IAction {
   readonly type: string = STANDBY;
   constructor(public payload: any = {}) {}
 }
+
+
+export const actions = {
+  [BLAH]: BlahAction,
+  [WALK_FORWARD]: WalkForwardAction,
+  [WALK_BACKWARDS]: WalkBackwardsAction,
+  [SIDESTEP_LEFT]: SideStepLeftAction,
+  [SIDESTEP_RIGHT]: SideStepRightAction,
+  [TURN]: TurnAction,
+  [STANDBY]: StandbyAction
+};

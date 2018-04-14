@@ -5,3 +5,7 @@ export class MoveAction implements IAction {
   readonly type: string = MOVE;
   constructor(public payload: any = {}) {}
 }
+
+export const actions = {
+  [MOVE]: MoveAction
+};

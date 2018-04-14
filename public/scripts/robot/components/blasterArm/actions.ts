@@ -17,3 +17,10 @@ export class CoolDownAction implements IAction {
   readonly type: string = COOL_DOWN;
   constructor(public payload: any = {}) {}
 }
+
+
+export const actions = {
+  [SHOOT]: ShootAction,
+  [RECOIL]: RecoilAction,
+  [COOL_DOWN]: CoolDownAction
+};

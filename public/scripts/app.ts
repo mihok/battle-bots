@@ -8,6 +8,8 @@ import { Engine } from './ui/engine';
 import { MainScene } from './ui/mainScene';
 import { ComponentContainer } from './ui/component-container';
 
+import { controls } from './ui/controls';
+
 declare var THREE: any;
 
 function onload() {
@@ -22,7 +24,7 @@ function onload() {
     core.registerComponent(BlasterArmComponent, 'leftArm');
     core.registerComponent(BipedComponent, 'legs');
 
-    core.subscribeToState((state) => { 
+    core.subscribeToState((state) => {
         console.log("Core State", state);
     });
 
@@ -36,7 +38,7 @@ function onload() {
 
     core.dispatch(new CoreActions.TakeDamageAction(5));
 
-    // let headActions = core.getComponentActions('head');
+    let headActions = core.getComponentActions('head');
 
     core.command('head', new headActions.SeekAction());
 
