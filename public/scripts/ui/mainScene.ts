@@ -1,5 +1,6 @@
 import { Engine } from './engine';
 import { Sky } from './sky';
+import { RobotMesh } from './robotMesh';
 
 declare var THREE: any;
 
@@ -27,6 +28,7 @@ export class MainScene {
 
         scene.add(terrainObj);
 
+        /*
         // Main mesh
         let mesh = new THREE.Object3D();
 
@@ -76,13 +78,17 @@ export class MainScene {
         mesh.add(leftLeg);
         mesh.add(rightLeg);
 
-        scene.add(mesh);
+      scene.add(mesh);
+         */
+
+      let robotMesh = new RobotMesh(scene);
+
 
         engine.camera.position.z = 5;
         engine.camera.position.x = 5;
         engine.camera.position.y = 5;
 
-        engine.camera.lookAt(mesh.position);
+        engine.camera.lookAt(robotMesh.getPosition());
 
         // scene.gameObjects = [];
         // scene.fog = new THREE.Fog(0xf7d9aa, 1000, 8000);
