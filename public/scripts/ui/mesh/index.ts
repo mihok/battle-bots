@@ -165,6 +165,6 @@ export class RobotMesh {
     this.mesh.translateZ(dt * this.state.delta.parallel);
 
     // Update rotation
-    this.mesh.rotateY(this.state.direction * dt);
+    this.mesh.rotateY(this.state.direction * 1.5 * dt);
   }
 }

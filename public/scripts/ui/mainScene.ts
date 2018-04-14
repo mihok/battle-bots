@@ -8,48 +8,47 @@ declare var THREE: any;
 export class MainScene {
 
     public scene;
-
+    public engine;
+    public robotMesh;
 
     constructor(engine: Engine) {
 
         let scene = new THREE.Scene();
-        let light = new THREE.PointLight( 0xff0000, 1, 100 );
-        light.position.set( 0, 10, 3 );
-        scene.add( light );
+        let light = new THREE.PointLight(0xff0000, 1, 100);
+        light.position.set(0, 10, 3);
+        scene.add(light);
 
 
         // Terrain mesh
         let terrainObj = new THREE.Object3D();
         let geomTerrain = new THREE.BoxGeometry(200, 1, 200);
-        let matTerrain = new THREE.MeshBasicMaterial({ color: 0x8c8c8c });
+        let matTerrain = new THREE.MeshBasicMaterial({ color: 0xC0924C });
         let terrain = new THREE.Mesh(geomTerrain, matTerrain);
         terrainObj.add(terrain);
         terrainObj.position.set(0, -4, 0);
 
         scene.add(terrainObj);
-      
+
         // Initiate our "game" objects
         let robotMesh = new RobotMesh(scene);
         robotMesh.init();
-      
+
+        this.robotMesh = robotMesh;
+
+        engine.camera.position.z = -23;
+        engine.camera.position.x = -4;
+        engine.camera.position.y = 11;
+        engine.camera.lookAt(robotMesh.getPosition());
+        this.robotMesh.mesh.add(engine.camera);
+
         scene.gameObjects = [
-          robotMesh,
+            robotMesh,
         ];
 
+        scene.fog = new THREE.Fog(0xf7d9aa, 1000, 8000);
 
-        // Stare at our robot
-        engine.camera.position.z = 5;
-        engine.camera.position.x = 5;
-        engine.camera.position.y = 5;
 
-        engine.camera.lookAt(robotMesh.getPosition());
-
-        // scene.fog = new THREE.Fog(0xf7d9aa, 1000, 8000);
-
-        // this.scene = scene;
-
-      // Create lights.
-      /*
+        // Create lights.
         let hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9);
 
         let shadowLight = new THREE.DirectionalLight(0xffffff, .9);
@@ -76,26 +75,13 @@ export class MainScene {
         scene.add(shadowLight);
 
         scene.update = this.update.bind(this);
-       */
 
-        // // Draw the terrain.
-        // let terrain = new THREE.Object3D();
-        // let terrainGeometry = new THREE.BoxGeometry(10000, 1, 10000);
-        // let terrainMaterial = new THREE.MeshPhongMaterial({color: Engine.colors.brown, shading: THREE.FlatShading});
-        // let terrainMesh = new THREE.Mesh(terrainGeometry, terrainMaterial);
-        // terrain.add(terrainMesh);
+        let sky = new Sky(100);
+        sky.draw(scene);
 
-        // scene.add(terrain);
-
-        // let sky = new Sky(100);
-        // sky.draw(scene);
-
-        // engine.camera.position.x = 2000;
-        // engine.camera.position.y = 50;
-        // engine.camera.position.z = -250;
-        // engine.camera.lookAt(new THREE.Vector3( 0, 100, 0 ));
 
         this.scene = scene;
+        this.engine = engine;
     }
 
 
@@ -103,6 +89,8 @@ export class MainScene {
         for (var i = 0, gameObject; gameObject = this.scene.gameObjects[i]; i++) {
             gameObject.update(dt);
         }
+
+        // this.engine.camera.lookAt(this.robotMesh.getPosition());
     }
 
 

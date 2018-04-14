@@ -29,12 +29,15 @@ export class Engine {
 
     init() {
         let canvasEl = document.getElementById("preview");
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            antialias: true
+        });
 
         this.renderer.setSize(canvasEl.clientWidth, canvasEl.clientHeight);
         canvasEl.appendChild(this.renderer.domElement);
 
-        this.camera = new THREE.PerspectiveCamera(75, canvasEl.clientWidth / canvasEl.clientHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, canvasEl.clientWidth / canvasEl.clientHeight, 1, 15000);
 
         controls.addMouseHandler(this.renderer.domElement, this.drag.bind(this), this.zoomIn.bind(this), this.zoomOut.bind(this));
     }
@@ -86,6 +89,7 @@ export class Engine {
         pos.x = radius * Math.sin(theta) * Math.cos(phi);
         pos.y = radius * Math.sin(theta) * Math.sin(phi);
         pos.z = radius * Math.cos(theta);
+
 
         this.camera.position.add(center);
         this.camera.lookAt(center);
