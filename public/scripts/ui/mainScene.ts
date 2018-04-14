@@ -30,6 +30,7 @@ export class MainScene {
       
         // Initiate our "game" objects
         let robotMesh = new RobotMesh(scene);
+        robotMesh.init();
       
         scene.gameObjects = [
           robotMesh,

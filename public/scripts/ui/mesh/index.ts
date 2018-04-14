@@ -14,6 +14,7 @@ declare var THREE: any;
 export class RobotMesh {
 
   private mesh: any;
+  private state: any;
 
   // TODO: Get a better name
   private subMeshes = {}
@@ -70,7 +71,7 @@ export class RobotMesh {
     // let head = this.createHead();
     mesh.add(head.getTHREEMesh());
     
-    core.registerComponent(HeadComponent, 'head');
+    // core.registerComponent(HeadComponent, 'head');
     // core.subscribeToComponentState('head', this.handleHeadStateChange);
 
 
@@ -78,7 +79,7 @@ export class RobotMesh {
     let leftArm = new LeftArmMesh();
     mesh.add(leftArm.getTHREEMesh());
     
-    core.registerComponent(BlasterArmComponent, 'leftArm');
+    // core.registerComponent(BlasterArmComponent, 'leftArm');
     // core.subscribeToComponentState('leftArm', this.handleLeftArmStateChange);
 
     let rightArm = new RightArmMesh();
@@ -89,14 +90,17 @@ export class RobotMesh {
     mesh.add(leftLeg);
     mesh.add(rightLeg);
 
-    core.registerComponent(BipedComponent, 'legs');
-    core.subscribeToComponentState('legs', this.updatePosition);
+    // core.registerComponent(BipedComponent, 'legs');
 
 
     this.mesh = mesh;
 
     scene.add(this.mesh);
-  } 
+  }
+
+  public init () {
+    core.subscribeToComponentState('legs', this.updatePosition.bind(this));
+  }
 
   // Left this in the base mesh because I kind of felt it worked here
   private createTorso () {
@@ -136,14 +140,9 @@ export class RobotMesh {
   }
 
   private updatePosition (state) {
-    
-    this.mesh.position.add(new THREE.Vector3(
-      dt * state.delta.perpendicular,
-      0,
-      dt * state.delta.parallel
-    ))
+    console.log("[Legs]", "Should update now", state);
 
-    // this.mesh.position.set(
+    this.state = state;
   }
 
   public setPosition () {
@@ -155,6 +154,12 @@ export class RobotMesh {
   }
 
   public update (dt) {
-    // console.log("[RobotMesh] UPDATE");
+    console.log("[RobotMesh] UPDATE", dt);
+    // if (state.delta.parallel) {
+    this.mesh.position.add(new THREE.Vector3(
+      dt*this.state.delta.perpendicular, 
+      0,
+      dt*this.state.delta.parallel));
+    // }
   }
 }
