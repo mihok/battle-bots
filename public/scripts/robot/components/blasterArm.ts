@@ -31,7 +31,9 @@ export default class BlasterArm extends Arm {
     cool: true
   }
 
-  constructor () { }
+  constructor () {
+    super();
+  }
 
   reducer (state, action) {
     switch (action.type) {
@@ -54,10 +56,10 @@ export default class BlasterArm extends Arm {
     console.log('PEW PEW PEW'); 
 
     if (this.state.cool) {
-      this.dispatch(actions.shoot());
+      this.dispatch(new BlasterShootAction({}));
 
       setTimeout(() => {
-        this.dispatch(actions.coolDown())
+        this.dispatch(new BlasterCoolDownAction({}));
       }, this.state.coolDownTime);
     }
   }

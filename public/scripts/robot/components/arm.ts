@@ -2,6 +2,7 @@ import { IComponent } from '../component';
 
 export default class Arm implements IComponent {
 
+  actions = [];
   state = {};
 
   constructor () { }
