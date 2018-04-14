@@ -1,30 +1,23 @@
-// const core = ?
+import { IComponent } from '../component';
 
-class Arm {
+export default class Arm implements IComponent {
 
-  subscribers = [];
-
-  actions = { }
-  state = { }
+  state = {};
 
   constructor () { }
 
+  subscribers = [];
   subscribeToState(subscribe) {
     this.subscribers.push(subscribe);
     subscribe(this.state);
   }
 
-  methods () {
+  getActions () {
     return this.actions;
   }
- 
+
+  // Override this
   reducer (state, action) {
-    console.log('ARM', state, action);
-
-    switch(action.type) {
-
-    }
-
     return this.state;
   }
 
@@ -38,7 +31,4 @@ class Arm {
       this.subscribers[i](this.state);
     }
   }
-
 }
-
-export const Arm;
