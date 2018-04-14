@@ -1,6 +1,6 @@
-import { IComponent } from './component';
-import { IAction } from './action';
-
+import { IComponent } from '../component';
+import { IAction } from '../action';
+import * as CoreActions from './actions';
 
 export interface ICoreState {
     health?: number;
@@ -55,11 +55,6 @@ class Core {
     }
 
 
-    public getActions(): IAction[] {
-        return this.actions;
-    }
-
-
     public getComponents() {
         return this.components;
     }
@@ -79,13 +74,14 @@ class Core {
 
 
     private reducer(state: ICoreState, action: IAction) {
+        console.log(`[Core Action] ${action.type}`);
         switch(action.type) {
-            case TAKE_DAMAGE:
+            case CoreActions.TAKE_DAMAGE:
                 return {
                     ...this.state,
                     health: this.state.health - action.payload
                 };
-            case HEAL:
+            case CoreActions.HEAL:
                 return {
                     ...this.state,
                     health: this.state.health + action.payload
@@ -97,7 +93,7 @@ class Core {
     }
 
 
-    public dispatch(action: CoreAction) {
+    public dispatch(action: CoreActions.CoreAction) {
         this.state = this.reducer(this.state, action);
         this.emitChange();
     }
@@ -109,27 +105,6 @@ class Core {
         }
     }
 }
-
-
-// Action names
-export const TAKE_DAMAGE = '[Core] Take Damage';
-export const HEAL = '[Core] Heal';
-
-
-export class TakeDamageAction implements IAction {
-    readonly type: string = TAKE_DAMAGE;
-    constructor(public payload: any = {}) {}
-}
-
-
-export class HealAction implements IAction {
-    readonly type: string = HEAL;
-    constructor(public payload: any = {}) {}
-}
-
-
-export type CoreAction =
-    TakeDamageAction;
 
 
 export const core = new Core();
