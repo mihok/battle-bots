@@ -19,7 +19,13 @@ class Core {
     public instance: Core = null;
 
     private subscribers: Function[] = [];
-    private components: any = {};
+    private components: any = {
+        head: null,
+        leftArm: null,
+        rightArm: null,
+        backpack: null,
+        legs: null
+    };
 
 
     private state: ICoreState = initialState;
@@ -31,16 +37,17 @@ class Core {
     }
 
 
-    public registerComponent(component: any, alias: string) {
-        const componentName = component.name || alias;
+    public registerComponent(component: any, alias?: string) {
+        const newComponent = new component();
+        const componentName = newComponent.type;
+        console.log(`Registering component ${componentName}`);
         if (this.components[componentName]) {
             throw new Error(`Component ${componentName} already registered`);
         }
 
-        this.components = {
-            ...this.components,
-            [componentName]: component
-        };
+        this.components[componentName] = newComponent;
+
+        console.log(this.components);
     }
 
 
