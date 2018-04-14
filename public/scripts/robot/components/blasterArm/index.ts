@@ -14,8 +14,8 @@ export interface IEnergyWeaponState extends IWeaponState {
 const initialState: IEnergyWeaponState = {
   isFiring: false,
   isCool: true,
-  coolDownTime: 250,
-  fireDelay: 10,
+  coolDownTime: 1000,
+  fireDelay: 250,
 }
 
 // Actions
