@@ -135,8 +135,15 @@ export class RobotMesh {
     console.log("[Legs]", state);
   }
 
-  private updatePosition () {
+  private updatePosition (state) {
+    
+    this.mesh.position.add(new THREE.Vector3(
+      dt * state.delta.perpendicular,
+      0,
+      dt * state.delta.parallel
+    ))
 
+    // this.mesh.position.set(
   }
 
   public setPosition () {
@@ -148,6 +155,6 @@ export class RobotMesh {
   }
 
   public update (dt) {
-        console.log("[RobotMesh] UPDATE");
+    // console.log("[RobotMesh] UPDATE");
   }
 }
