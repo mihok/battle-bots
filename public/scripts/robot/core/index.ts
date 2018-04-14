@@ -39,7 +39,7 @@ class Core {
 
     public registerComponent(component: any, alias?: string) {
         const newComponent = new component();
-        const componentName = newComponent.type;
+        const componentName = alias || newComponent.type;
         console.log(`Registering component ${componentName}`);
         if (this.components[componentName]) {
             throw new Error(`Component ${componentName} already registered`);

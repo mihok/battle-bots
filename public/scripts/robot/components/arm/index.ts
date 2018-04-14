@@ -2,7 +2,7 @@ import { IComponent } from '../../component';
 import { IAction } from '../../action';
 
 export class ArmComponent implements IComponent {
-  public readonly type ='leftArm';
+  public readonly type = 'arm';
 
   actions = {};
   state = {};
