@@ -1,4 +1,7 @@
 build/
+build-babel/
+build-tsc/
+dist/
 package-lock.json
 
 
