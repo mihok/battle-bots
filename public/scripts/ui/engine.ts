@@ -56,6 +56,8 @@ export class Engine {
 
         this.currentScene.update(dt);
 
+        this.currentScene.update(dt);
+
         this.renderer.render(this.currentScene.scene, this.camera);
     }
 
