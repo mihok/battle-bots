@@ -21,9 +21,6 @@ class Core {
     private subscribers: Function[] = [];
     private components: any = {};
 
-    private actions: IAction[] = [
-
-    ];
 
     private state: ICoreState = initialState;
 
@@ -31,6 +28,19 @@ class Core {
     constructor() {
         if (this.instance === null)
             this.instance = this;
+    }
+
+
+    public registerComponent(component: any, alias: string) {
+        const componentName = component.name || alias;
+        if (this.components[componentName]) {
+            throw new Error(`Component ${componentName} already registered`);
+        }
+
+        this.components = {
+            ...this.components,
+            [componentName]: component
+        };
     }
 
 
@@ -55,8 +65,8 @@ class Core {
     }
 
 
-    public getComponentMethods(component: string) {
-        return this.components[component].getMethods();
+    public getComponentActions(component: string) {
+        return this.components[component].getActions();
     }
 
 
