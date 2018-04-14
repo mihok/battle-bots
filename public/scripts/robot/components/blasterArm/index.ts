@@ -1,5 +1,5 @@
-import Arm from '../arm';
-import * as BlasterAction from './actions';
+import { ArmComponent } from '../arm';
+import * as BlasterActions from './actions';
 
 export interface IWeaponState {
   isFiring: boolean;
@@ -14,21 +14,24 @@ export interface IEnergyWeaponState extends IWeaponState {
 const initialState: IEnergyWeaponState = {
   isFiring: false,
   isCool: true,
-  coolDownTime: 250,
-  fireDelay: 10,
+  coolDownTime: 1000,
+  fireDelay: 250,
 }
 
 // Actions
-export default class BlasterArm extends Arm {
-  state: IEnergyWeaponState = initialState
+export class BlasterArmComponent extends ArmComponent {
+
+  actions = BlasterActions;
+  state: IEnergyWeaponState = initialState;
 
   constructor () {
     super();
   }
 
   reducer (state, action) {
+    console.log('[BlasterArm]', action);
     switch (action.type) {
-      case BlasterAction.SHOOT:
+      case BlasterActions.SHOOT:
         // TODO: Not sure how to do side effects
         if (!this.state.isCool || this.state.isFiring) {
           return this.state;
@@ -36,11 +39,11 @@ export default class BlasterArm extends Arm {
 
         // TODO: Should we be doing this in the reducers?
         setTimeout(() => {
-          this.dispatch(new BlasterAction.RecoilAction({}));
+          this.dispatch(new BlasterActions.RecoilAction({}));
         }, this.state.fireDelay);
 
         setTimeout(() => {
-          this.dispatch(new BlasterAction.CoolDownAction({}));
+          this.dispatch(new BlasterActions.CoolDownAction({}));
         }, this.state.coolDownTime);
 
         return {
@@ -48,12 +51,12 @@ export default class BlasterArm extends Arm {
           isFiring: true,
           isCool: false,
         }
-      case BlasterAction.RECOIL:
+      case BlasterActions.RECOIL:
         return {
           ...this.state,
           isFiring: false,
         }
-      case BlasterAction.COOL_DOWN:
+      case BlasterActions.COOL_DOWN:
         return {
           ...this.state,
           isCool: true,
