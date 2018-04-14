@@ -1,21 +1,8 @@
 {
   "compilerOptions": {
-    "outDir": "./build",
-    "baseUrl": "src",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "target": "es5",
-    "module": "commonjs"
-  },
-  "include": [
-      "scripts/**/*"
-  ],
-  "exclude": [
-      "node_modules",
-      "**/*.spec.ts"
-  ]
+    "target": "es2017",      /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+    "module": "commonjs",    /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "rootDir": "./scripts",      /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "outDir": "./build-tsc", /* Redirect output structure to the directory. */
+  }
 }
