@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   <title>BattleBots</title>
-  <style type="text/css">
-    *, body {
-      margin:0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    canvas {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: linear-gradient(#e4e0ba, #f7d9aa);
-    }
-  </style>
+  <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body id="three">
+
+
+  <div class="container">
+    <div class="components-container panel">
+      <h3>Available Actions</h3>
+      <div id="component-container"></div>
+    </div>
+    <div class="commands-container panel">
+      <h3>Action Queue</h3>
+      <div id="action-queue-container"></div>
+    </div>
+    <div id="preview" class="preview-container"></div>
+  </div>
+
   <!-- Load game scripts -->
-  <!-- <script type="text/javascript" src="./vendor/threejs/three.js"></script> -->
+  <script type="text/javascript" src="./vendor/threejs/three.js"></script>
   <script type="text/javascript" src="./dist/bundle.js"></script>
 </body>
 </html>
