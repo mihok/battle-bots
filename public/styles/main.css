@@ -35,6 +35,7 @@
 }
 
 .scrollable {
+    position: relative;
     overflow-y: scroll;
     height: 100%;
     padding-bottom: 120px;
@@ -78,6 +79,12 @@
     padding: 14px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     margin: 4px;
+    cursor: pointer;
+    height: 50px;
+}
+
+.action-item:hover {
+    background: #f3f3f3;
 }
 
 .action-add {
@@ -95,4 +102,35 @@
 
 .action-add:hover {
     background: #f3f3f3;
+}
+
+
+#action-interval-tick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#action-queue-container {
+    margin-left: 14px;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+
+    border-left: 10px solid black;
+}
+
+button {
+    width: 100%;
+    margin: 4px;
+    border: 0px;
+    background: rgb(16, 20, 136);
+    color: white;
+    padding: 6px 12px;
+    cursor: pointer;
 }
