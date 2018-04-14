@@ -52,6 +52,11 @@ export class Engine {
 
         let now = new Date().getTime();
         let dt = (now - this.time || now) / 1000;
+        this.time = now;
+
+        this.currentScene.update(dt);
+
+        this.currentScene.update(dt);
 
         this.renderer.render(this.currentScene.scene, this.camera);
     }

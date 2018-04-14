@@ -3,7 +3,7 @@ import * as BipedActions from './actions';
 
 const initialState: ILegsState = {
   standByDelay: 500,
-  speed: 1.15,
+  speed: 15,
 
   // pie (360 degrees)
   direction: 0,

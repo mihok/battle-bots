@@ -17,9 +17,6 @@ function onload() {
 
     const engine = new Engine();
 
-    engine.init();
-    engine.loadScene(MainScene);
-
     // Load the core
     core.registerComponent(HeadComponent, 'head');
     core.registerComponent(BlasterArmComponent, 'leftArm');
@@ -27,6 +24,9 @@ function onload() {
 
     componentManager.init();
     queueManager.init();
+    
+    engine.init();
+    engine.loadScene(MainScene);
 }
 
 
