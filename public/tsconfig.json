@@ -1,11 +1,21 @@
 {
-    "compilerOptions": {
-      "sourceMap": true,
-      "module": "commonjs",
-      "target": "es5",
-    },
-    "include": [
-      "scripts"
-    ],
-    "compileOnSave": false
-  }
+  "compilerOptions": {
+    "outDir": "./build",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "module": "commonjs"
+  },
+  "include": [
+      "scripts/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+  ]
+}

@@ -18,8 +18,8 @@ class Core {
 
     public instance: Core = null;
 
-    private subscribers = [];
-    private components = {};
+    private subscribers: Function[] = [];
+    private components: any = {};
 
     private actions: IAction[] = [
 
