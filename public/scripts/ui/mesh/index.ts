@@ -161,8 +161,8 @@ export class RobotMesh {
     // var direction = new THREE.Vector3( 1, 0, 1 );
     // direction = matrix.multiplyVector3( direction );
 
-    this.mesh.translateX(dt * this.state.delta.perpendicular);
-    this.mesh.translateZ(dt * this.state.delta.parallel);
+    this.mesh.translateX(dt * 1.5 * this.state.delta.perpendicular);
+    this.mesh.translateZ(dt * 1.5 * this.state.delta.parallel);
 
     // Update rotation
     this.mesh.rotateY(this.state.direction * 1.5 * dt);

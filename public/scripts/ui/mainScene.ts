@@ -22,7 +22,7 @@ export class MainScene {
         // Terrain mesh
         let terrainObj = new THREE.Object3D();
         let geomTerrain = new THREE.BoxGeometry(200, 1, 200);
-        let matTerrain = new THREE.MeshBasicMaterial({ color: 0xC0924C });
+        let matTerrain = new THREE.MeshBasicMaterial({ color: 0x30A860 });
         let terrain = new THREE.Mesh(geomTerrain, matTerrain);
         terrainObj.add(terrain);
         terrainObj.position.set(0, -4, 0);

@@ -59,7 +59,7 @@ export class BipedComponent extends LegsComponent {
           ...this.state,
           delta: {
             ...this.state.delta,
-            perpendicular: -1 * this.state.speed,
+            perpendicular: 1 * this.state.speed,
           }
         }
 
@@ -68,7 +68,7 @@ export class BipedComponent extends LegsComponent {
           ...this.state,
           delta: {
             ...this.state.delta,
-            perpendicular: 1 * this.state.speed,
+            perpendicular: -1 * this.state.speed,
           }
         }
       case BipedActions.TURN_RIGHT: {
