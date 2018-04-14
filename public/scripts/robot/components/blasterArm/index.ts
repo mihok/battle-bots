@@ -1,5 +1,5 @@
-import { IAction } from '../action';
-import Arm from './arm';
+import Arm from '../arm';
+import * as BlasterAction from './actions';
 
 export interface IWeaponState {
   isFiring: boolean;
@@ -19,26 +19,6 @@ const initialState: IEnergyWeaponState = {
 }
 
 // Actions
-export const SHOOT = 'SHOOT';
-export const START_SHOOTING = 'START_SHOOTING';
-export const STOP_SHOOTING = 'STOP_SHOOTING';
-export class BlasterShootBeginAction implements IAction {
-  readonly type: string = START_SHOOTING;
-  constructor(public payload: any = {}) {}
-}
-
-export class BlasterShootEndAction implements IAction {
-  readonly type: string = STOP_SHOOTING;
-  constructor(public payload: any = {}) {}
-}
-
-export const COOL_DOWN = 'COOL_DOWN';
-export class BlasterCoolDownAction implements IAction {
-  readonly type: string = COOL_DOWN;
-  constructor(public payload: any = {}) {}
-}
-
-
 export default class BlasterArm extends Arm {
   state: IEnergyWeaponState = initialState
 
@@ -48,7 +28,7 @@ export default class BlasterArm extends Arm {
 
   reducer (state, action) {
     switch (action.type) {
-      case START_SHOOTING:
+      case BlasterAction.SHOOT:
         // TODO: Not sure how to do side effects
         if (!this.state.isCool || this.state.isFiring) {
           return this.state;
@@ -56,11 +36,11 @@ export default class BlasterArm extends Arm {
 
         // TODO: Should we be doing this in the reducers?
         setTimeout(() => {
-          this.dispatch(new BlasterShootEndAction({}));
+          this.dispatch(new BlasterAction.RecoilAction({}));
         }, this.state.fireDelay);
 
         setTimeout(() => {
-          this.dispatch(new BlasterCoolDownAction({}));
+          this.dispatch(new BlasterAction.CoolDownAction({}));
         }, this.state.coolDownTime);
 
         return {
@@ -68,12 +48,12 @@ export default class BlasterArm extends Arm {
           isFiring: true,
           isCool: false,
         }
-      case STOP_SHOOTING:
+      case BlasterAction.RECOIL:
         return {
           ...this.state,
           isFiring: false,
         }
-      case COOL_DOWN:
+      case BlasterAction.COOL_DOWN:
         return {
           ...this.state,
           isCool: true,

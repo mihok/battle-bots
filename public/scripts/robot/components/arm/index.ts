@@ -1,5 +1,5 @@
-import { IComponent } from '../component';
-import { IAction } from '../action';
+import { IComponent } from '../../component';
+import { IAction } from '../../action';
 
 export default class Arm implements IComponent {
 
