@@ -1,11 +1,5 @@
 import { IAction } from '../../action';
 
-export const BLAH = '[Biped] Blah';
-export class BlahAction implements IAction {
-  readonly type: string = BLAH;
-  constructor(public payload: any = {}) {}
-}
-
 export const WALK_FORWARD = '[Biped] Walk Forward';
 export class WalkForwardAction implements IAction {
   readonly type: string = WALK_FORWARD;
@@ -58,7 +52,6 @@ export class StandbyAction implements IAction {
 
 
 export const actions = {
-  [BLAH]: BlahAction,
   [WALK_FORWARD]: WalkForwardAction,
   [WALK_BACKWARDS]: WalkBackwardsAction,
   [SIDESTEP_LEFT]: SideStepLeftAction,
