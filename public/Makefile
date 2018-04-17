@@ -2,8 +2,14 @@ NPM_CMD ?= npm
 
 default: build run
 
+compile:
+	$(NPM_CMD) run tsc
+
+clean:
+	$(NPM_CMD) run clean
+
 run:
 	$(NPM_CMD) run start
 
-build:
-	$(NPM_CMD) run build
+build: clean
+	$(NPM_CMD) run webpack

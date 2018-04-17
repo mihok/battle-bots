@@ -3,19 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "clean": "npm run clean-build-steps && rm -rf dist",
+    "clean": "rm -rf dist",
     "tsc": "tsc",
-    "babel": "babel build-tsc --out-dir build-babel --source-maps",
-    "webpack": "webpack && cp -r vendor dist",
-    "clean-build-steps": "rm -rf build-tsc build-babel",
-    "build": "npm run clean && npm run tsc && npm run babel && npm run webpack && npm run clean-build-steps",
+    "webpack": "webpack",
+    "webpack-watch": "",
     "start": "http-server"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/plugin-transform-regenerator": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "babel-loader": "^8.0.0-beta",
     "http-server": "^0.11.1",
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.1",
@@ -24,6 +25,7 @@
     "webpack-dev-server": "^3.1.3"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.44",
     "@types/stats": "^0.16.30",
     "@types/three": "^0.91.7",
     "stats.js": "^0.17.0",

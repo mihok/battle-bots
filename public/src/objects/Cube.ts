@@ -1,6 +1,8 @@
+import * as THREE from 'three';
+
 import { GameObject } from '../engine';
 
-declare var THREE: any;
+// declare var THREE: any;
 
 export class Cube extends GameObject {
 

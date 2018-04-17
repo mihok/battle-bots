@@ -1,6 +1,8 @@
+import * as THREE from 'three';
+
 import { controls } from './controls';
 
-declare var THREE: any;
+// declare var THREE: any;
 
 export class Engine {
 
