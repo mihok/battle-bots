@@ -1,32 +1,45 @@
 const path = require('path');
+const webpack = require('webpack');
 // const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const entries = {
+  /*
   'library': [
     '@babel/polyfill',
 
     'stats.js',
     'three'
   ], 
-  'bundle': [
+  */
+  'app': [
     path.join(__dirname, '/src/app.ts')
   ]
 };
 
 const plugins = [
-  /*
-  new TSConfigPathsPlugin()
-  new webpack.optimize.CommonsChunkPlugin({ 
-    name: ['library', 'manifest']
-  }),
-  */
 ];
 
 module.exports = {
   devtool: "source-map",
   context: __dirname,
   entry: entries, // ['@babel/polyfill', './build-babel/app.js'],
-  // plugins: plugins,
+  optimization: {
+    runtimeChunk: {
+      name: "manifest", 
+    },
+    splitChunks: {
+      chunks: "initial",
+      cacheGroups: {
+        default: false,
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "library",
+          priority: -10
+        }
+      }
+    }
+  },
+  plugins: plugins,
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')

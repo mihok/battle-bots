@@ -8,6 +8,9 @@ compile:
 clean:
 	$(NPM_CMD) run clean
 
+watch:
+	$(NPM_CMD) run webpack-watch
+
 run:
 	$(NPM_CMD) run start
 

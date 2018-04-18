@@ -6,7 +6,7 @@
     "clean": "rm -rf dist",
     "tsc": "tsc",
     "webpack": "webpack",
-    "webpack-watch": "",
+    "webpack-watch": "webpack-dev-server",
     "start": "http-server"
   },
   "author": "",
@@ -17,7 +17,6 @@
     "@babel/plugin-transform-regenerator": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
     "babel-loader": "^8.0.0-beta",
-    "http-server": "^0.11.1",
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.1",
     "webpack": "^4.5.0",
