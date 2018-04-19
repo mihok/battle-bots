@@ -2,10 +2,12 @@
  * Base scene class for managing a scene
  */
 
+import * as THREE from 'three';
+
 import { Engine, engine } from './Engine';
 import { GameObject } from './GameObject';
 
-declare var THREE: any;
+// declare var THREE: any;
 
 
 export class Scene {

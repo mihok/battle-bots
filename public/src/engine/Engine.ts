@@ -1,7 +1,8 @@
+import * as THREE from 'three';
 import { Scene } from './Scene';
 
 declare var Stats: any;
-declare var THREE: any;
+// declare var THREE: any;
 
 export class Engine {
 
