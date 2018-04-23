@@ -24,6 +24,7 @@ module.exports = {
   context: __dirname,
   entry: entries, // ['@babel/polyfill', './build-babel/app.js'],
   optimization: {
+    minimize: true,
     runtimeChunk: {
       name: "manifest", 
     },

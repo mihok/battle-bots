@@ -5583,6 +5583,26 @@ textextensions@2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/textextensions/-/textextensions-2.2.0.tgz#38ac676151285b658654581987a0ce1a4490d286"
 
+three.js@^0.77.1:
+  version "0.77.1"
+  resolved "https://registry.yarnpkg.com/three.js/-/three.js-0.77.1.tgz#07858a8749e4b627a31083252a2d987776cca32a"
+  dependencies:
+    three "0.77.0"
+
+"three.terrain@file:../../three.terrain.js":
+  version "1.6.0"
+  dependencies:
+    three.js "^0.77.1"
+
+"three.terrain@file:/home/mihok/development/src/github.com/mihok/three.terrain.js":
+  version "1.6.0"
+  dependencies:
+    three.js "^0.77.1"
+
+three@0.77.0:
+  version "0.77.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.77.0.tgz#8b0b1b00047689ceaa020d480a562ca60d87ff37"
+
 three@^0.91.0:
   version "0.91.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.91.0.tgz#033fe745b64e56e679a86581957cfd1c5f9fe284"

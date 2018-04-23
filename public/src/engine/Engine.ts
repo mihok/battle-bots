@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { Scene } from './Scene';
+// TODO: Update this to follow new structure
+import { controls } from '../ui/controls';
 
 declare var Stats: any;
 // declare var THREE: any;
@@ -58,6 +60,9 @@ export class Engine {
         this.currentScene = new scene();
         this.currentScene.Init();
         this.Update();
+
+        // TODO: Find a better place for this
+        controls.addMouseHandler(this.renderer.domElement, this.currentScene.Drag.bind(this.currentScene), this.currentScene.ZoomIn.bind(this.currentScene), this.currentScene.ZoomOut.bind(this.currentScene));
     }
 
 
@@ -120,7 +125,6 @@ export class Engine {
         this.statsMS = null;
         this.statsMB = null;
     }
-
 }
 
 

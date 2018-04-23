@@ -4,7 +4,7 @@ let Controls = function(Controls) {
 	if (Controls.addMouseHandler)
 		return Controls;
 
-	Controls.addMouseHandler = function (domObject, drag, zoomIn, zoomOut) {
+    Controls.addMouseHandler = function (domObject, drag, zoomIn, zoomOut) {
 		var startDragX = null,
 		    startDragY = null;
 
