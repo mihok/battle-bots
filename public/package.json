@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.44",
-    "@types/stats": "^0.16.30",
+    "@types/stats.js": "^0.17.0",
     "@types/three": "^0.91.7",
-    "stats.js": "^0.17.0",
+    "stats": "git+https://git@github.com/mihok/stats.js#feature/npm-module",
     "three": "^0.91.0"
   }
 }

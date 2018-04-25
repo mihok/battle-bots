@@ -13,7 +13,7 @@ import { GameObject } from './GameObject';
 export class Scene {
 
     public gameObjects: GameObject[] = [];
-    private _scene;
+    public _scene;
 
     public camera;
 

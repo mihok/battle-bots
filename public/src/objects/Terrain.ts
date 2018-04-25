@@ -291,29 +291,6 @@ export class Terrain extends GameObject {
 
         mesh.rotation.set(-0.5 * Math.PI, 0, 0);
 
-        // const bodyEl = document.getElementById('three');
-        // Create the new plane.
-        /*
-        const xS = 63, yS = 63;
-        const terrainOpts = {
-           easing: Terrain.Linear,
-           frequency: 2.5,
-           // heightmap: Terrain.PerlinDiamond,
-           material: new THREE.MeshBasicMaterial({color: 0x0000FF/*0x30A860}),
-           maxHeight: 100,
-           minHeight: -100,
-           steps: 1,
-           useBufferGeometry: false,
-           xSegments: xS,
-           xSize: 10,
-           ySegments: yS,
-           ySize: 10
-        };
-        // const terrain = new Terrain(terrainOpts);
-        //
-        */
-
-        // console.log('Terrain', Terrain.prototype, THREE.Mesh.prototype);
         this.object3D.add(mesh);
 
         // TODO: Dont use one var to handle multiple types
@@ -329,7 +306,7 @@ export class Terrain extends GameObject {
 
         // terrainOpts.heightmap = heightmap;
         this.heightmap = this.toHeightmap(geometry.vertices);
-        this.heightmap.setAttribute('style', 'position: absolute; border: 1px solid #777; top: 10px; left: 10px;');
+        this.heightmap.setAttribute('style', 'position: absolute; border: 1px solid #fff; top: 10px; left: 10px;');
         document.body.appendChild(this.heightmap);
 
         // Planes are initialized on the XY plane, so rotate the plane to make
