@@ -40,14 +40,15 @@ export class Engine {
         this.height = height || window.innerHeight;
 
         this.renderer = new THREE.WebGLRenderer({
-            alpha: true/*false*/,
+            alpha: false,
             antialias: true
         });
 
-        this.renderer.gammaInput = true;
-        this.renderer.gammaOutput = true;
+        // this.renderer.gammaInput = true;
+        // this.renderer.gammaOutput = true;
 
         this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
         this.renderer.setSize(width, height);
 
         if (element)

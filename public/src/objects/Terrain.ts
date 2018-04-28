@@ -301,7 +301,15 @@ export class Terrain extends GameObject {
         } else {
             console.warn('An invalid value was passed for `options.heightmap`: ' + this.options.heightmap);
         }
-    
+
+        // TODO: Move this outside of here so we can make this reusable
+        // Influence the geometry to have a centre
+        // Hill
+        Terrain.Influence(geometry.vertices, options, Terrain.Influences.Hill, 0.5, 0.5, options.xSize / 1.5, 4, THREE.NormalBlending, Terrain.EaseIn);
+        // Plateau
+        Terrain.Influence(geometry.vertices, options, Terrain.Influences.Plateau(2), 0.5, 0.5, options.xSize / 4, 2, THREE.NormalBlending, Terrain.EaseIn);
+
+
         Terrain.Normalize(mesh, options);
 
         // terrainOpts.heightmap = heightmap;
@@ -1185,6 +1193,7 @@ export class Terrain extends GameObject {
 
     // Helper functions
 
+
    /**
     * Scatter a mesh across the terrain.
     *
@@ -1436,6 +1445,11 @@ export class Terrain extends GameObject {
         // Not meaningful in Additive or Subtractive mode
         Flat: function(x) {
             return 0;
+        },
+        Plateau: function (v) {
+            return function (x) {
+                return v;
+            }
         },
         Volcano: function(x) {
             return 0.94 - 0.32 * (Math.abs(2 * x) + Math.cos(2 * Math.PI * Math.abs(x) + 0.4));
