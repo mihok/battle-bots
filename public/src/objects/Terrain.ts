@@ -291,29 +291,6 @@ export class Terrain extends GameObject {
 
         mesh.rotation.set(-0.5 * Math.PI, 0, 0);
 
-        // const bodyEl = document.getElementById('three');
-        // Create the new plane.
-        /*
-        const xS = 63, yS = 63;
-        const terrainOpts = {
-           easing: Terrain.Linear,
-           frequency: 2.5,
-           // heightmap: Terrain.PerlinDiamond,
-           material: new THREE.MeshBasicMaterial({color: 0x0000FF/*0x30A860}),
-           maxHeight: 100,
-           minHeight: -100,
-           steps: 1,
-           useBufferGeometry: false,
-           xSegments: xS,
-           xSize: 10,
-           ySegments: yS,
-           ySize: 10
-        };
-        // const terrain = new Terrain(terrainOpts);
-        //
-        */
-
-        // console.log('Terrain', Terrain.prototype, THREE.Mesh.prototype);
         this.object3D.add(mesh);
 
         // TODO: Dont use one var to handle multiple types
@@ -324,12 +301,20 @@ export class Terrain extends GameObject {
         } else {
             console.warn('An invalid value was passed for `options.heightmap`: ' + this.options.heightmap);
         }
-    
+
+        // TODO: Move this outside of here so we can make this reusable
+        // Influence the geometry to have a centre
+        // Hill
+        Terrain.Influence(geometry.vertices, options, Terrain.Influences.Hill, 0.5, 0.5, options.xSize / 1.5, 4, THREE.NormalBlending, Terrain.EaseIn);
+        // Plateau
+        Terrain.Influence(geometry.vertices, options, Terrain.Influences.Plateau(2), 0.5, 0.5, options.xSize / 4, 2, THREE.NormalBlending, Terrain.EaseIn);
+
+
         Terrain.Normalize(mesh, options);
 
         // terrainOpts.heightmap = heightmap;
         this.heightmap = this.toHeightmap(geometry.vertices);
-        this.heightmap.setAttribute('style', 'position: absolute; border: 1px solid #777; top: 10px; left: 10px;');
+        this.heightmap.setAttribute('style', 'position: absolute; border: 1px solid #fff; top: 10px; left: 10px;');
         document.body.appendChild(this.heightmap);
 
         // Planes are initialized on the XY plane, so rotate the plane to make
@@ -1208,6 +1193,7 @@ export class Terrain extends GameObject {
 
     // Helper functions
 
+
    /**
     * Scatter a mesh across the terrain.
     *
@@ -1459,6 +1445,11 @@ export class Terrain extends GameObject {
         // Not meaningful in Additive or Subtractive mode
         Flat: function(x) {
             return 0;
+        },
+        Plateau: function (v) {
+            return function (x) {
+                return v;
+            }
         },
         Volcano: function(x) {
             return 0.94 - 0.32 * (Math.abs(2 * x) + Math.cos(2 * Math.PI * Math.abs(x) + 0.4));

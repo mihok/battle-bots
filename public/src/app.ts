@@ -7,6 +7,7 @@ import { MainScene } from './scenes/MainScene';
 
 function onload() {
     engine.Init();
+    engine.showStats = true;
     engine.LoadScene(MainScene);
 }
 

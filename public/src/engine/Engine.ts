@@ -1,10 +1,8 @@
+import Stats from 'stats';
 import * as THREE from 'three';
 import { Scene } from './Scene';
 // TODO: Update this to follow new structure
 import { controls } from '../ui/controls';
-
-declare var Stats: any;
-// declare var THREE: any;
 
 export class Engine {
 
@@ -46,6 +44,11 @@ export class Engine {
             antialias: true
         });
 
+        // this.renderer.gammaInput = true;
+        // this.renderer.gammaOutput = true;
+
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
         this.renderer.setSize(width, height);
 
         if (element)
@@ -106,9 +109,9 @@ export class Engine {
         this.statsMS.showPanel(1);
         this.statsMB.showPanel(2);
 
-        this.statsFPS.domElement.style.cssText = 'position:absolute;top:0px;right:0px;';
-        this.statsMS.domElement.style.cssText = 'position:absolute;top:0px;right:80px;';
-        this.statsMB.domElement.style.cssText = 'position:absolute;top:0px;right:160px;';
+        this.statsFPS.domElement.style.cssText = 'position:absolute;top:10px;right:10px;border:1px solid #fff;';
+        this.statsMS.domElement.style.cssText = 'position:absolute;top:10px;right:100px;border:1px solid #fff;';
+        this.statsMB.domElement.style.cssText = 'position:absolute;top:10px;right:190px;border:1px solid #fff;';
 
         document.body.appendChild(this.statsFPS.dom);
         document.body.appendChild(this.statsMS.dom);

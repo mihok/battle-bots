@@ -18,6 +18,7 @@
     "@babel/preset-env": "^7.0.0-beta.44",
     "babel-loader": "^8.0.0-beta",
     "http-server": "^0.11.1",
+    "json-loader": "^0.5.7",
     "ts-loader": "^4.2.0",
     "typescript": "^2.8.1",
     "webpack": "^4.5.0",
@@ -26,9 +27,9 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.44",
-    "@types/stats": "^0.16.30",
+    "@types/stats.js": "^0.17.0",
     "@types/three": "^0.91.7",
-    "stats.js": "^0.17.0",
+    "stats": "git+https://git@github.com/mihok/stats.js#feature/npm-module",
     "three": "^0.91.0"
   }
 }

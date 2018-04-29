@@ -3,14 +3,12 @@ const webpack = require('webpack');
 // const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const entries = {
-  /*
-  'library': [
-    '@babel/polyfill',
+  // 'library': [
+    // '@babel/polyfill',
 
-    'stats.js',
-    'three'
-  ], 
-  */
+    // 'stats.js',
+    // 'three'
+  // ], 
   'app': [
     path.join(__dirname, '/src/app.ts')
   ]
@@ -80,6 +78,10 @@ module.exports = {
             loader: 'ts-loader'
           }
         ]
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }
